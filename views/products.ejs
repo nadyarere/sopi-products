@@ -61,12 +61,12 @@
                 <div class="row d-flex">
                     <% products.forEach(el=> { %>
                         <div class="col">
-                            <div class="card" style="width: 18rem; height: 35rem;">
-                                <div class="container" style="height: 27rem;">
+                            <div class="card" style="width: 18rem; height: 25rem;">
+                                <div class="container" style="height: 20rem;">
 
-                                    <a href="/products/<%= el.id %>">
+                                    <!-- <a href="/products/<%= el.id %>">
                                         <img class="card-img-top" src="<%= el.imgUrl %>" alt="Card image cap">
-                                    </a>
+                                    </a> -->
 
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -91,7 +91,7 @@
 
                                     </div>
                                 </div>
-                                <div class="container d-flex justify-content-center" style="margin-top: 5rem;">
+                                <div class="container d-flex justify-content-center" style="margin-top: 1rem;">
                                     <% if (user.role==="Customer" ) { %>
                                         <a href="/products/<%= el.id %>/buy" class="btn btn-success mr-1">Buy</a>
                                         <% } %>
