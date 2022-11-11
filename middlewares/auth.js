@@ -21,7 +21,7 @@ const isLoggin = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
     if (req.session.user.role !== 'Admin') {
-        const error = 'You have to be an admin to add'
+        const error = 'You have to be an admin to that'
         res.redirect(`/products?error=${error}`)
     } else {
         next()
