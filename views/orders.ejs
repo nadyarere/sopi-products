@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Check Orders</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://uploads.turbologo.com/uploads/design/hq_preview_image/881852/draw_svg20210625-19886-u8ghol.svg.png"
+                width="30" height="30" class="d-inline-block align-top" alt="">
+            Sopi Products
+        </a>
+        <div class="form-inline">
+            <p style="margin-top: 1rem; margin-right: 10px;">
+                <%= user.role==="Admin" ? "Admin" : "Customer" %> - <%= user.name %>
+            </p>
+            <a href="/products" style="margin-right: 10px;" class="btn btn-outline-success my-2 my-sm-0">Back to
+                Products</a>
+
+            <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">Log Out</a>
+        </div>
+    </nav>
+    <% if (user.role==="Admin" ) { %>
+        <!-- if admin -->
+        <div style="background-color:#dddddd; height: fit-content; padding: 15px;">
+            <h3 style="text-align: center; margin: 25px auto;">Total Order by Category</h3>
+            <div class="container-fluid justify-content-center d-flex">
+                <% categories.forEach(el=> { %>
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem; margin-right: 25px;">
+                        <div class="card-header"><b>
+                                <%= el.name%>
+                            </b></div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= el.dataValues.totalPrice ? currency(+el.dataValues.totalPrice) : currency(0)%>
+                            </h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Buyer</td>
+                    <td>address</td>
+                    <td>Product Name</td>
+                    <td>Price</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach((el, index)=> { %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td>
+                            <%= el.User.name %>
+                        </td>
+                        <td>
+                            <% profiles.forEach(element=> { %>
+                                <% if (element.UserId === el.User.id) { %>
+                                    <%= element.address %>
+                                    <% } %>
+                                        <% }) %>
+                        </td>
+                        <td>
+                            <%= el.Product.name %>
+                        </td>
+                        <td>
+                            <%= currency(el.Product.price) %>
+                        </td>
+                        <%if(el.orderStatus === "In Process") { %>
+                        <td><a href="/orders/<%= el.id%>/delivered" class="btn btn-outline-success my-2 my-sm-0">
+                            Deliver Item
+                        </a></td>
+                            <% } else {%> 
+                                <td>Delivered</td>
+                                <% } %>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+        <% } else { %>
+            <div style="margin-top: 20px;" class="container justify-content-center">
+                
+                <!-- if customer -->
+                <h3>Name: <%=  user.name %></h3>
+                <h5>Address: <% profiles.forEach(element=> { %>
+                    <% if (element.UserId === user.id) { %>
+                        <%= element.address %>
+                        <% } %>
+                            <% }) %>
+                        </h5>
+                <h5>Total Item: <%= countOrder %></h5>
+                <h5>Total Price: <%= currency(sumOrder) %></h5>
+                <br>
+                <hr>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>No</td>
+                            <td>Product Name:</td>
+                            <td>Price</td>
+                            <td>Status</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach((el, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= el.Product.name %>
+                                </td>
+                                <td>
+                                    <%= currency(el.Product.price) %>
+                                </td>
+                              
+                                <td><%= el.status==="In Process" ? "Delivered" : "In Process" %></td>
+                                <td><a href="/orders/<%= el.id %>/delete" class="btn btn-outline-warning my-2 my-sm-0">Delete</a></td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+</body>
+
+</html>

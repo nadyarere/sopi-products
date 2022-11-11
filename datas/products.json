@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Paramex Tablet",
+        "description": "Obat paramex tablet isi 4",
+        "price": 2000,
+        "CategoryId": 1
+    },
+    {
+        "id": 2,
+        "name": "Paramex Sirup",
+        "description": "Obat paramex sirup rasa strawberry",
+        "price": 10000,
+        "CategoryId": 1
+    },
+    {
+        "id": 3,
+        "name": "Insto Eye Drops",
+        "description": "Insto eye drops regular 7.5ml",
+        "price": 12000,
+        "CategoryId": 2
+    },
+    {
+        "id": 4,
+        "name": "Rohto Steril Tetes",
+        "description": "Rohto steril obat mata 7ml",
+        "price": 12000,
+        "CategoryId": 2
+    },
+    {
+        "id": 5,
+        "name": "Sido Muncul Herbal Sari Temulawak",
+        "description": "Sido Muncul Herbal Sari Temulawak - Hati Sehat Antioksidan Hepatitis",
+        "price": 60000,
+        "CategoryId": 3
+    },
+    {
+        "id": 6,
+        "name": "Tolak Angin",
+        "description": "Tolak Angin Cair 1x5 sachet",
+        "price": 18000,
+        "CategoryId": 3
+    }
+]

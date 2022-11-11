@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Hatfield",
+    "email": "hatfieldshannon@entroflex.com",
+    "role": "Customer",
+    "password": "12345678"
+  },
+  {
+    "id": "2",
+    "name": "Alford",
+    "email": "alfordshannon@entroflex.com",
+    "role": "Admin",
+    "password": "12345678"
+  },
+  {
+    "id": "3",
+    "name": "Kline",
+    "email": "klineshannon@entroflex.com",
+    "role": "Customer",
+    "password": "12345678"
+  },
+  {
+    "id": "4",
+    "name": "Jenny",
+    "email": "jennyshannon@entroflex.com",
+    "role": "Admin",
+    "password": "12345678"
+  },
+  {
+    "id": "5",
+    "name": "Kathie",
+    "email": "kathieshannon@entroflex.com",
+    "role": "Customer",
+    "password": "12345678"
+  },
+  {
+    "id": "6",
+    "name": "Judith",
+    "email": "judithshannon@entroflex.com",
+    "role": "Admin",
+    "password": "12345678"
+  }
+]

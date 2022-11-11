@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Profile</title>
+    <style>
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        form div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background-color: #000
+        }
+
+        .card {
+            width: 350px;
+            background-color: #efefef;
+            border: none;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .image img {
+            transition: all 0.5s
+        }
+
+        .card:hover .image img {
+            transform: scale(1.5)
+        }
+
+        /* .btn {
+            height: 140px;
+            width: 140px;
+            border-radius: 50%
+        } */
+
+        .name {
+            font-size: 22px;
+            font-weight: bold
+        }
+
+        .idd {
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        .idd1 {
+            font-size: 12px
+        }
+
+        .number {
+            font-size: 22px;
+            font-weight: bold
+        }
+
+        .follow {
+            font-size: 12px;
+            font-weight: 500;
+            color: #444444
+        }
+
+        .btn1 {
+            height: 40px;
+            width: 150px;
+            border: none;
+            background-color: #000;
+            color: #aeaeae;
+            font-size: 15px
+        }
+
+        .text span {
+            font-size: 13px;
+            color: #545454;
+            font-weight: 500
+        }
+
+        .icons i {
+            font-size: 19px
+        }
+
+        hr .new1 {
+            border: 1px solid
+        }
+
+        .join {
+            font-size: 14px;
+            color: #a0a0a0;
+            font-weight: bold
+        }
+
+        .date {
+            background-color: #ccc
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://uploads.turbologo.com/uploads/design/hq_preview_image/881852/draw_svg20210625-19886-u8ghol.svg.png"
+                width="30" height="30" class="d-inline-block align-top" alt="">
+            Sopi Products
+        </a>
+        <div class="form-inline">
+            <p style="margin-top: 1rem; margin-right: 10px;">
+                <%= role ==="Admin" ? "Admin" : "Customer" %> - <%= name %>
+            </p>
+            <a href="/products" style="margin-right: 10px;" class="btn btn-outline-success my-2 my-sm-0">Back to
+                Products</a>
+
+            <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">Log Out</a>
+        </div>
+    </nav>
+    <% if (profile) { %>
+        <!-- tunjukin halaman profile -->
+        <h1 style="text-align: center; color: #f2f2f2; margin-top: 100px;">Profile Info</h1>
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="card p-4">
+                <div class=" image d-flex flex-column justify-content-center align-items-center">
+                    <button class="btn btn-secondary">
+                        <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button>
+                    <span class="name mt-3"><%= profile.User.name %></span> <span class="idd"><%= profile.User.email%></span>
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+                        <span class="idd1"><%= profile.phone %></span>
+                        <span><i class="fa fa-copy"></i></span>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center mt-3">
+                        <span class="number">Role</span>
+                    </div>
+                    <div class=" d-flex mt-2">
+                        <button class="btn1 btn-dark"><%= profile.User.role %></button>
+                    </div>
+                    <div class="text mt-3">
+                        <span>Home Address:
+                            <br><%= profile.address %> </span>
+                    </div>
+                    <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                        <span><i class="fa fa-twitter"></i></span>
+                        <span><i class="fa fa-facebook-f"></i></span>
+                        <span><i class="fa fa-instagram"></i></span>
+                        <span><i class="fa fa-linkedin"></i></span>
+                    </div>
+                    <div class=" px-2 rounded mt-4 date ">
+                        <span class="join">Joined <%= profile.User.dateRegister %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } else { %>
+            <!-- tunjukkin form profile -->
+            <div style="margin-top: 100px;">
+                <form action="/profile" method="post" class="container" style="background-color: white;">
+
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="Your phone number..">
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Your address..">
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <% } %>
+</body>
+
+</html>
