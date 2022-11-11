@@ -4,7 +4,7 @@ const app = express()
 const bcrypt = require('bcryptjs');
 const { User, Product, Category, Profile, Order, sequelize } = require('../models/index');
 const { currency } = require('../helpers/index');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const bp = require('body-parser')
 const qr = require('qrcode')
 app.use(bp.urlencoded({ extended: false }))
@@ -227,12 +227,15 @@ class Controller {
                     include: [
                         { model: User },
                         { model: Product },
-                    ]
+                    ],
+                    //kasih where kelupaan
+                    where: {
+                        UserId: user.id
+                    }
                 })
             })
             .then((result) => {
                 orders = result
-                
                 return Profile.findAll()
             })
             .then((result) => {
