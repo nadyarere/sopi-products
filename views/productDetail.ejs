@@ -5,39 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
     <nav class="navbar navbar-light bg-light">
         <a href="/products">
-            <button type="submit">BACK</button>
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Back To Products</button>
         </a>
     </nav>
 
-    <h1>
-        <%= result.name %>
-    </h1>
-    <img src="<%= src %>">
-
-    <h1>
-        <%= result.description %>
-    </h1>
-    <h1>
-        <%= result.price %>
-    </h1>
-
-    <h1>=============</h1>
-    <h1>
-        Price for BPJS participants: <%= result.isCoveredByInsurance(result.CategoryId) %>
-    </h1>
-
-    <% if(result.CategoryId===2 ) { %>
-        <h3>*please show your BPJS card as a requirement</h6>
-            <% } %>
-
-
-
+    <div class="container-fluid" style="text-align: center; margin-top: 50px; background-color: #dddddd; padding: 20px;">
+        <h1>
+            <%= result.name %>
+        </h1>
+        <img src="<%= src %>">
+    
+        <h1>
+            <%= result.description %>
+        </h1>
+        <h1>
+            <%= result.price %>
+        </h1>
+    
+        <h1>=============</h1>
+        <h1>
+            Price for BPJS participants: <%= result.isCoveredByInsurance(result.CategoryId) %>
+        </h1>
+    
+        <% if(result.CategoryId===2 ) { %>
+            <h3>*please show your BPJS card as a requirement</h6>
+                <% } %>
+    </div>
 
 </body>
 

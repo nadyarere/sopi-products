@@ -37,7 +37,7 @@ class Controller {
                         const { id, role, name } = user
     
                         req.session.user = { id, role, name }
-                        console.log(req.session)
+                        
                         res.redirect('/products')
                     } else {
                         res.redirect(`/login?error=${'Invalid Email or Password'}`)
@@ -162,7 +162,7 @@ class Controller {
     }
 
     static profile (req, res) {
-        console.log(req.session)
+        
         const { id, name, role } = req.session.user
     
         Profile.findOne({
@@ -232,7 +232,7 @@ class Controller {
             })
             .then((result) => {
                 orders = result
-                console.log(result.User)
+                
                 return Profile.findAll()
             })
             .then((result) => {
@@ -250,6 +250,7 @@ class Controller {
                         sumOrder += +el.dataValues.totalPrice
                     }
                 })
+                
                 res.render('orders', { orders, categories, currency, user, profiles, countOrder: result, sumOrder })
             })
             .catch((err) => {

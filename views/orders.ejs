@@ -138,7 +138,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% orders.forEach((el, index)=> { %>
+                        <% orders.forEach((el, index)=> { %>                            
                             <tr>
                                 <td>
                                     <%= index + 1 %>
@@ -150,8 +150,12 @@
                                     <%= currency(el.Product.price) %>
                                 </td>
                               
-                                <td><%= el.status==="In Process" ? "Delivered" : "In Process" %></td>
-                                <td><a href="/orders/<%= el.id %>/delete" class="btn btn-outline-warning my-2 my-sm-0">Delete</a></td>
+                                <td><%= el.orderStatus %></td>
+                                <% if (el.orderStatus === "Delivered") { %>
+                                    <td><a href="/orders/<%= el.id %>/delete" class="btn btn-outline-warning my-2 my-sm-0">Delete</a></td>
+                                <% } else {%>
+                                    <td>Cannot Delete</td>
+                                    <% }%>
                             </tr>
                             <% }) %>
                     </tbody>
