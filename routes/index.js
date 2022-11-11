@@ -1,5 +1,4 @@
 const express = require('express');
-const { productsPage } = require('../controllers/controller');
 const Controller = require('../controllers/controller')
 const router = express.Router()
 const {isLoggin} = require('../middlewares/auth');

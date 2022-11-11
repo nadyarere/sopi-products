@@ -9,10 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    static formatNumber(value){
+      return "+62" + value
+    }
+
     static associate(models) {
       // define association here
       Profile.belongsTo(models.User)
     }
+
   }
   Profile.init({
     address: DataTypes.STRING,

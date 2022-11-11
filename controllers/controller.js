@@ -175,7 +175,7 @@ class Controller {
         })
             .then((result) => {
                 // res.send(result)
-                res.render('profile', { profile: result, name, role })
+                res.render('profile', { profile: result, name, role, Profile })
             }).catch((err) => {
                 res.send(err)
             });
@@ -329,16 +329,17 @@ class Controller {
     static renderEditProduct(req, res) {
         const errors = req.query.errors
         const ProductId = req.params.productId
+        let product = {}
 
         Product.findByPk(ProductId)
-            .then((product) => {
-                Category.findAll({
+            .then((result) => {
+                product = result
+                return Category.findAll({
                     attributes: ['name', 'id']
                 })
-                    .then((categories) => {
-                        res.render('editForm', { product, categories, errors })
-
-                    })
+            })
+            .then((categories) => {
+                res.render('editForm', { product, categories, errors })
             })
             .catch((err) => {
                 res.send(err)
