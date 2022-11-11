@@ -293,9 +293,16 @@ class Controller {
 
     static deleteProduct (req, res) {
         const ProductId = req.params.productId
-    
-        Product.destroy({
-            where: { id: ProductId }
+        
+        Order.destroy({
+            where:{
+                ProductId
+            }
+        })
+        .then(result => {
+            return Product.destroy({
+                where: { id: ProductId }
+            })
         })
             .then(() => {
                 res.redirect('/products')
