@@ -223,15 +223,22 @@ class Controller {
         })
             .then((result) => {
                 categories = result
+
+                let where = {}
+                if(user.role === "Customer"){
+                    where = {
+                        UserId: user.id
+                    }
+                } 
+
+                //order buat customer
                 return Order.findAll({
                     include: [
                         { model: User },
                         { model: Product },
                     ],
                     //kasih where kelupaan
-                    where: {
-                        UserId: user.id
-                    }
+                    where
                 })
             })
             .then((result) => {
@@ -245,6 +252,16 @@ class Controller {
                 })
             })
             .then((result) => {
+                let sumCustomer = 0
+                orders.forEach(el => {
+                    if(el.UserId === user.id){
+                        sumCustomer += el.price
+                    }
+                });
+
+
+
+                //buat admin
                 let sumOrder = 0
                 categories.forEach(el => {
                     if(el.dataValues.totalPrice === null){
@@ -254,7 +271,7 @@ class Controller {
                     }
                 })
                 
-                res.render('orders', { orders, categories, currency, user, profiles, countOrder: result, sumOrder })
+                res.render('orders', { orders, categories, currency, user, profiles, countOrder: result, sumOrder, sumCustomer })
             })
             .catch((err) => {
                 res.send(err)
